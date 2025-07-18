@@ -1,5 +1,6 @@
 {
-  "name": "ratings-features",
+  "name": "@repo/features",
+  "private": true,
   "main": "./src/index.ts",
   "scripts": {
     "snippets": "tsx ./scripts/snippets.ts",
