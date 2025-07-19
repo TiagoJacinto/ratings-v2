@@ -50,11 +50,11 @@ repos:
         name: "✅ taskfile · Validate Task configuration"
 
   #STRICT
--   repo: https://github.com/markdownlint/markdownlint
-    rev: v0.13.0
-    hooks:
-    -   id: markdownlint
-        name: "📝 markdown · Lint markdown"
+# -   repo: https://github.com/markdownlint/markdownlint
+#     rev: v0.13.0
+#     hooks:
+#     -   id: markdownlint
+#         name: "📝 markdown · Lint markdown"
 
   ## Shell ###
 
@@ -178,13 +178,13 @@ repos:
 
 -   repo: local
     hooks:
-      # - id: fix-quality
-      #   name: "🟦 typescript · Fix Quality"
-      #   entry: pnpm run quality:fix
-      #   language: system
-      #   # types: []
-      #   pass_filenames: false
-      #   always_run: true
+    -   id: eslint
+        name: "🟦 typescript · Lint with eslint"
+        entry: pnpm run lint:fix:eslint
+        language: system
+        # types: []
+        pass_filenames: false
+        always_run: true
 
     -   id: typescript
         name: "🟦 typescript · Check types"

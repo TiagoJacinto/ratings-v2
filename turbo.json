@@ -23,6 +23,9 @@
 		"lint:fix": {
 			"dependsOn": ["^lint:fix"]
 		},
+		"lint:fix:eslint": {
+			"dependsOn": ["^lint:fix:eslint"]
+		},
 
 		"quality:check": {
 			"dependsOn": ["^quality:check"]

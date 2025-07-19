@@ -14,25 +14,20 @@
 		"start:dev": "nest start --watch",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
-
 		"types:check": "tsc --noEmit",
-
 		"lint:check": "biome lint \"{src,apps,libs,test}/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\"",
-		"lint:fix": "biome lint --write --unsafe \"{src,apps,libs,test}/**/*.ts\" && eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
-
+		"lint:fix": "biome lint --write --unsafe \"{src,apps,libs,test}/**/*.ts\" && pnpm lint:fix:eslint",
+		"lint:fix:eslint": "eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
 		"quality:check": "biome check \"{src,apps,libs,test}/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\"",
 		"quality:fix": "biome check --write --unsafe \"{src,apps,libs,test}/**/*.ts\" && eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
-
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-
 		"test:unit": "jest --config ./test/jest.unit.config.ts",
 		"test:unit:features": "jest --config ./test/jest.unit.features.config.ts",
 		"test:e2e": "jest --config ./test/jest.e2e.config.ts",
 		"test:e2e:features": "jest --config ./test/jest.e2e.features.config.ts",
-
 		"db:mikro-orm:migration:initial": "mikro-orm migration:create --initial --config=src/shared/database/mikroorm/mikro-orm.config.ts",
 		"db:mikro-orm:migration:up": "pnpm mikro-orm migration:up --config=src/shared/database/mikroorm/mikro-orm.config.ts",
 		"db:migration:create": "typeorm migration:create ./src/shared/database/migrations/migration",
@@ -47,6 +42,7 @@
 		"@nestjs/core": "^11.0.1",
 		"@nestjs/platform-express": "^11.0.1",
 		"@nestjs/typeorm": "11.0.0",
+		"@repo/features": "workspace:*",
 		"class-transformer": "0.5.1",
 		"class-validator": "0.14.2",
 		"dotenv": "17.2.0",
@@ -54,7 +50,6 @@
 		"joi": "17.13.3",
 		"mysql2": "3.14.2",
 		"pg": "8.16.3",
-		"@repo/features": "workspace:*",
 		"reflect-metadata": "^0.2.2",
 		"rxjs": "^7.8.1",
 		"typeorm": "0.3.25"
@@ -82,7 +77,6 @@
 		"eslint-plugin-prettier": "^5.2.2",
 		"globals": "^16.0.0",
 		"jest": "^29.7.0",
-		"prettier": "^3.4.2",
 		"source-map-support": "^0.5.21",
 		"supertest": "^7.0.0",
 		"ts-jest": "^29.2.5",
