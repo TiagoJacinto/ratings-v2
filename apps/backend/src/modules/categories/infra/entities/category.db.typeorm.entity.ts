@@ -1,27 +1,27 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 type Props = {
-  name: string;
-  description?: string;
+	name: string;
+	description?: string;
 };
 
 @Entity()
 export class Category {
-  @PrimaryGeneratedColumn()
-  id!: number;
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-  @Column('varchar', { length: 100 })
-  name!: string;
+	@Column("varchar", { length: 100 })
+	name!: string;
 
-  @Column({ type: 'text', nullable: true })
-  description?: string;
+	@Column({ type: "text", nullable: true })
+	description?: string;
 
-  private constructor() {}
-  static create(props: Props) {
-    const category = new this();
-    category.name = props.name;
-    category.description = props.description;
+	private constructor() {}
+	static create(props: Props) {
+		const category = new Category();
+		category.name = props.name;
+		category.description = props.description;
 
-    return category;
-  }
+		return category;
+	}
 }

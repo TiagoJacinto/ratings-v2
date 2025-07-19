@@ -1,7 +1,7 @@
-import { IsString } from 'class-validator';
+import { IsString } from "class-validator";
 
 export class CreateCategoryDTO {
-  @IsString()
-  name!: string;
-  description?: string;
+	@IsString()
+	name!: string;
+	description?: string;
 }

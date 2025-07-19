@@ -1,12 +1,6 @@
-import { Category } from '../../domain/category';
-import { Category as CategoryEntity } from '../../infra/entities/category.db.typeorm.entity';
+import { Category } from "../../domain/category";
+import { Category as CategoryEntity } from "../../infra/entities/category.db.typeorm.entity";
 
-export class TypeORMCategoryMapper {
-  static toPersistence(domain: Category) {
-    return CategoryEntity.create(domain);
-  }
-
-  static toDomain(entity: CategoryEntity) {
-    return Category.create(entity);
-  }
-}
+export const toPersistence = (domain: Category) =>
+	CategoryEntity.create(domain);
+export const toDomain = (entity: CategoryEntity) => Category.create(entity);

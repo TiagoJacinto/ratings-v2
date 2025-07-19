@@ -1,9 +1,9 @@
 {
-  "name": "@repo/features",
-  "private": true,
-  "main": "./src/index.ts",
-  "scripts": {
-    "snippets": "tsx ./scripts/snippets.ts",
-    "steps": "tsx ./scripts/steps.ts"
-  }
+	"name": "@repo/features",
+	"private": true,
+	"main": "./src/index.ts",
+	"scripts": {
+		"snippets": "tsx ./scripts/snippets.ts",
+		"steps": "tsx ./scripts/steps.ts"
+	}
 }
