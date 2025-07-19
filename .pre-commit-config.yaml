@@ -204,7 +204,7 @@ repos:
 
     -   id: dprint
         name: "🌎 global · Format with dprint"
-        entry: dprint fmt --staged
+        entry: pnpm run format:fix:dprint --staged
         language: system
         # types: []
         pass_filenames: false
