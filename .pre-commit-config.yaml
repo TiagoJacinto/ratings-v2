@@ -20,6 +20,14 @@ repos:
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
 
+  ### pre-commit updates ###
+
+-   repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
+    rev: v0.8.0
+    hooks:
+    -   id: pre-commit-update
+        name: "update · pre-commit hooks"
+
   # ----------------------------- 🔒 Security Tools ---------------------------- #
 
 -   repo: https://github.com/gitleaks/gitleaks
@@ -35,9 +43,9 @@ repos:
     rev: v2.1.2
     hooks:
     -   id: biome-check
+        name: "🟨 javascript · Lint, format, and unsafe fixes with Biome"
         args: ["--unsafe"]
         additional_dependencies: ["@biomejs/biome@2.1.2"]
-        
 
   ### Data & Config Validation ###
 -   repo: https://github.com/python-jsonschema/check-jsonschema
@@ -50,11 +58,11 @@ repos:
         name: "✅ taskfile · Validate Task configuration"
 
   #STRICT
-# -   repo: https://github.com/markdownlint/markdownlint
-#     rev: v0.13.0
-#     hooks:
-#     -   id: markdownlint
-#         name: "📝 markdown · Lint markdown"
+-   repo: https://github.com/markdownlint/markdownlint
+    rev: v0.13.0
+    hooks:
+    -   id: markdownlint
+        name: "📝 markdown · Lint markdown"
 
   ## Shell ###
 
@@ -109,13 +117,13 @@ repos:
   # This helps ensure cross-compatibility with people who don't wish to use uv
 -   repo: https://github.com/astral-sh/uv-pre-commit
     # uv version.
-    rev: 0.5.27
+    rev: 0.8.0
     hooks:
       # STRICT -- This (kind of) enforces use of uv
-      - id: uv-sync
+    -   id: uv-sync
         name: "⚡️ uv · Sync dependencies with uv"
       # Update the uv lockfile
-      - id: uv-lock
+    -   id: uv-lock
         name: "⚡️ uv · Update dependency lockfile"
       # Export to txt
       # - id: uv-export
@@ -173,7 +181,7 @@ repos:
         additional_dependencies: [cz-conventional-gitmoji]
 
   # ---------------------------------------------------------------------------- #
-  #                             Local                                            #
+  #                                  Local                                       #
   # ---------------------------------------------------------------------------- #
 
 -   repo: local
