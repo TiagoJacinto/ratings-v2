@@ -1,21 +1,47 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
-  "ui": "tui",
-  "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    }
-  }
+	"$schema": "https://turborepo.com/schema.json",
+	"ui": "tui",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
+
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+
+		"types:check": {
+			"dependsOn": ["^types:check"]
+		},
+
+		"lint:check": {
+			"dependsOn": ["^lint:check"]
+		},
+		"lint:fix": {
+			"dependsOn": ["^lint:fix"]
+		},
+
+		"quality:check": {
+			"dependsOn": ["^quality:check"]
+		},
+		"quality:fix": {
+			"dependsOn": ["^quality:fix"]
+		},
+
+		"test:unit": {
+			"dependsOn": ["^test:unit"]
+		},
+		"test:unit:features": {
+			"dependsOn": ["^test:unit:features"]
+		},
+		"test:e2e": {
+			"dependsOn": ["^test:e2e"]
+		},
+		"test:e2e:features": {
+			"dependsOn": ["^test:e2e:features"]
+		}
+	}
 }

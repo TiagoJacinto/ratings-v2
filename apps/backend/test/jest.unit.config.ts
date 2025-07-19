@@ -3,6 +3,5 @@ import base from "./jest.base.config";
 
 export default {
 	...base,
-	testRegex: "\\.e2e(\\.[a-zA-Z0-9\\.]*)?\\.spec\\.ts",
-	maxWorkers: 1,
+	testRegex: "\\.unit(\\.[a-zA-Z0-9\\.]*)?\\.spec\\.ts",
 } satisfies Config;

@@ -1,16 +1,7 @@
-import { type Config } from 'jest';
-import base from './jest.base.config';
+import type { Config } from "jest";
+import e2e from "./jest.e2e.config";
 
 export default {
-  ...base,
-  moduleFileExtensions: ['js', 'json', 'ts'],
-  rootDir: '../',
-  testEnvironment: 'node',
-  testRegex: '.e2e.steps.spec.ts$',
-  transform: {
-    '^.+\.(t|j)s$': 'ts-jest',
-  },
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
+	...e2e,
+	testRegex: "\\.e2e\\.steps\\.spec\\.ts",
 } satisfies Config;

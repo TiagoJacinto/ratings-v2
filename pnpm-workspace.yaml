@@ -1,3 +1,13 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@suites/di.nestjs'
+  - '@suites/doubles.jest'
+  - '@swc/core'
+  - esbuild
+  - nx
+  - sqlite3
+  - unrs-resolver

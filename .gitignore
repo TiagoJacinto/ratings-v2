@@ -8,4 +8,10 @@ node_modules
 
 # vscode
 .vscode/*
-!.vscode/extensions.jso
+!.vscode/extensions.json
+
+# Testing
+coverage
+
+# turborepo
+.turbo
