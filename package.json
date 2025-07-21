@@ -27,9 +27,11 @@
 		"build": "turbo run build",
 		"dev": "turbo run dev",
 		"types:check": "turbo run types:check",
-		"format:check": "biome format . \"**/*.{ts,tsx,md}\"",
-		"format:fix": "biome format --fix \"**/*.{ts,tsx,md}\"",
+
+		"format:check": "turbo run format:check",
+		"format:fix": "turbo run format:fix",
 		"format:fix:dprint": "dprint fmt",
+
 		"lint:check": "turbo run lint:check",
 		"lint:fix": "turbo run lint:fix",
 		"lint:fix:eslint": "turbo run lint:fix:eslint",

@@ -15,11 +15,19 @@
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"types:check": "tsc --noEmit",
-		"lint:check": "biome lint \"{src,apps,libs,test}/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\"",
-		"lint:fix": "biome lint --write --unsafe \"{src,apps,libs,test}/**/*.ts\" && pnpm lint:fix:eslint",
+
+		"format:check": "biome format",
+		"format:fix": "biome format --write",
+
+		"lint:check:eslint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+		"lint:check": "biome lint && pnpm lint:check:eslint",
+
 		"lint:fix:eslint": "eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
-		"quality:check": "biome check \"{src,apps,libs,test}/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\"",
-		"quality:fix": "biome check --write --unsafe \"{src,apps,libs,test}/**/*.ts\" && eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
+		"lint:fix": "biome lint --write --unsafe && pnpm lint:fix:eslint",
+
+		"quality:check": "biome check && pnpm lint:check:eslint",
+		"quality:fix": "biome check --write --unsafe && pnpm lint:fix:eslint",
+
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",

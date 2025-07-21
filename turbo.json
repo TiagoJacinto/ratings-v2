@@ -17,6 +17,13 @@
 			"dependsOn": ["^types:check"]
 		},
 
+		"format:check": {
+			"dependsOn": ["^format:check"]
+		},
+		"format:fix": {
+			"dependsOn": ["^format:fix"]
+		},
+
 		"lint:check": {
 			"dependsOn": ["^lint:check"]
 		},
