@@ -31,7 +31,7 @@ repos:
   # ----------------------------- 🔒 Security Tools ---------------------------- #
 
 -   repo: https://github.com/gitleaks/gitleaks
-    rev: v8.27.2
+    rev: v8.28.0
     hooks:
     -   id: gitleaks
         name: "🔒 security · Detect hardcoded secrets"
@@ -186,6 +186,13 @@ repos:
 
 -   repo: local
     hooks:
+    -   id: install-dependencies
+        name: "📦 pnpm · Install dependencies"
+        entry: pnpm install
+        language: system
+        pass_filenames: false
+        always_run: true
+  
     -   id: eslint
         name: "🟦 typescript · Lint with eslint"
         entry: pnpm run lint:fix:eslint
@@ -194,7 +201,7 @@ repos:
         pass_filenames: false
         always_run: true
 
-    -   id: typescript
+    -   id: typescript-type-check
         name: "🟦 typescript · Check types"
         entry: pnpm run types:check
         language: system
@@ -218,6 +225,13 @@ repos:
         # types: []
         pass_filenames: false
         always_run: true
+
+    -   id: mark-precommit-run
+        name: Mark pre-commit as run
+        entry: python3 scripts/mark_precommit_run.py
+        language: system
+        always_run: true
+        pass_filenames: false
 
 # Notes
 # I can use ensemble hooks when maintaining too many hooks (Megalinter, Superlinter, qlty)
