@@ -18,3 +18,6 @@ coverage
 
 # python
 .venv
+
+# next.js
+.next
