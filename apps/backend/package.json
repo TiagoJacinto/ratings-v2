@@ -15,14 +15,19 @@
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"types:check": "tsc --noEmit",
+
 		"format:check": "biome format",
 		"format:fix": "biome format --write",
+
 		"lint:check:eslint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-		"lint:check": "biome lint ; pnpm lint:check:eslint",
+		"lint:check": "biome lint && pnpm lint:check:eslint",
+
 		"lint:fix:eslint": "eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
-		"lint:fix": "biome lint --write --unsafe ; pnpm lint:fix:eslint",
-		"quality:check": "biome check ; pnpm lint:check:eslint",
-		"quality:fix": "biome check --write --unsafe ; pnpm lint:fix:eslint",
+		"lint:fix": "biome lint --write --unsafe && pnpm lint:fix:eslint",
+
+		"quality:check": "biome check && pnpm lint:check:eslint",
+		"quality:fix": "biome check --write --unsafe && pnpm lint:fix:eslint",
+
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",
@@ -75,7 +80,7 @@
 		"@types/jest": "^29.5.14",
 		"@types/node": "^22.10.7",
 		"@types/supertest": "^6.0.2",
-		"eslint": "^9.31.0",
+		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-prettier": "^5.2.2",
 		"globals": "^16.0.0",
