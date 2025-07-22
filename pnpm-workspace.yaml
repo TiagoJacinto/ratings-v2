@@ -7,7 +7,11 @@ onlyBuiltDependencies:
   - '@suites/di.nestjs'
   - '@suites/doubles.jest'
   - '@swc/core'
+  - '@tailwindcss/oxide'
+  - core-js-pure
+  - dprint
   - esbuild
   - nx
+  - sharp
   - sqlite3
   - unrs-resolver
