@@ -1,11 +1,17 @@
 import personal from "@tiagojacinto/eslint-config";
+//@ts-ignore
+import biome from "eslint-config-biome";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
 	{ ignores: ["dist"] },
+	biome,
 	personal.configs.recommended({
 		extensions: {
-			withProjectService: true,
+			with: {
+				projectService: true,
+				biome: true,
+			},
 		},
 		plugins: {
 			languages: {
@@ -14,6 +20,12 @@ export default tseslint.config(
 			},
 			formatting: {
 				perfectionist: true,
+			},
+			build: {
+				turbo: true,
+			},
+			testing: {
+				jest: true,
 			},
 		},
 	}),
