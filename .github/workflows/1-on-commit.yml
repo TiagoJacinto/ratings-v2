@@ -5,71 +5,71 @@ on: [push]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.13'
-        
-    - name: Setup uv
-      uses: astral-sh/setup-uv@v3
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: '10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac'
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-      
-    - name: Check if pre-commit was run locally
-      id: check-precommit
-      run: |
-        if [ -f ".precommit-run" ]; then
-          echo "Pre-commit marker found"
-          
-          # Validate the marker is recent and relevant
-          MARKER_HEAD=$(jq -r '.git_head' .precommit-run)
-          CURRENT_HEAD=$(git rev-parse HEAD)
-          
-          if [ "$MARKER_HEAD" = "$CURRENT_HEAD" ]; then
-            echo "skip_precommit=true" >> $GITHUB_OUTPUT
-            echo "✅ Pre-commit was run locally for this commit"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Check if pre-commit was run locally
+        id: check-precommit
+        run: |
+          if [ -f ".precommit-run" ]; then
+            echo "Pre-commit marker found"
+
+            # Validate the marker is recent and relevant
+            MARKER_HEAD=$(jq -r '.git_head' .precommit-run)
+            CURRENT_HEAD=$(git rev-parse HEAD)
+
+            if [ "$MARKER_HEAD" = "$CURRENT_HEAD" ]; then
+              echo "skip_precommit=true" >> $GITHUB_OUTPUT
+              echo "✅ Pre-commit was run locally for this commit"
+            else
+              echo "skip_precommit=false" >> $GITHUB_OUTPUT
+              echo "⚠️ Pre-commit marker is stale, will run in CI"
+            fi
           else
             echo "skip_precommit=false" >> $GITHUB_OUTPUT
-            echo "⚠️ Pre-commit marker is stale, will run in CI"
+            echo "❌ No pre-commit marker found, will run in CI"
           fi
-        else
-          echo "skip_precommit=false" >> $GITHUB_OUTPUT
-          echo "❌ No pre-commit marker found, will run in CI"
-        fi
 
-    - name: Skip pre-commit (already run locally)
-      if: steps.check-precommit.outputs.skip_precommit == 'true'
-      run: |
-        echo "⏭️ Skipping pre-commit as it was already run locally"
-        pre-commit run install-dependencies
+      - name: Skip pre-commit (already run locally)
+        if: steps.check-precommit.outputs.skip_precommit == 'true'
+        run: |
+          echo "⏭️ Skipping pre-commit as it was already run locally"
+          pre-commit run install-dependencies
 
-    - uses: pre-commit/action@v3.0.1
-      env:
-        SKIP: typescript-type-check
-      if: steps.check-precommit.outputs.skip_precommit == 'false'
-    - uses: pre-commit-ci/lite-action@v1.1.0
-      if: always()
+      - uses: pre-commit/action@v3.0.1
+        env:
+          SKIP: typescript-type-check
+        if: steps.check-precommit.outputs.skip_precommit == 'false'
+      - uses: pre-commit-ci/lite-action@v1.1.0
+        if: always()
 
-    - name: Build
-      run: pnpm run build
-      
-    - name: Archive build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: frontend-build
-        path: ./apps/web/dist/
-        retention-days: 30
+      - name: Build
+        run: pnpm run build
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: ./apps/web/dist/
+          retention-days: 30
