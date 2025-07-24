@@ -23,6 +23,7 @@
 		"lint:check": "biome lint && pnpm lint:check:eslint",
 
 		"lint:fix:eslint": "eslint --fix \"{src,apps,libs,test}/**/*.ts\"",
+		"lint:fix:eslint:pre-commit": "pnpm lint:fix:eslint --quiet",
 		"lint:fix": "biome lint --write --unsafe && pnpm lint:fix:eslint",
 
 		"quality:check": "biome check && pnpm lint:check:eslint",
@@ -33,6 +34,7 @@
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 		"test:unit": "jest --config ./test/jest.unit.config.ts",
+		"test:unit:pre-commit": "pnpm test:unit --testTimeout 3000",
 		"test:unit:features": "jest --config ./test/jest.unit.features.config.ts",
 		"test:e2e": "jest --config ./test/jest.e2e.config.ts",
 		"test:e2e:features": "jest --config ./test/jest.e2e.features.config.ts",
@@ -95,19 +97,13 @@
 		"typescript-eslint": "^8.20.0"
 	},
 	"jest": {
-		"moduleFileExtensions": [
-			"js",
-			"json",
-			"ts"
-		],
+		"moduleFileExtensions": ["js", "json", "ts"],
 		"rootDir": "src",
 		"testRegex": ".*\\.spec\\.ts$",
 		"transform": {
 			"^.+\\.(t|j)s$": "ts-jest"
 		},
-		"collectCoverageFrom": [
-			"**/*.(t|j)s"
-		],
+		"collectCoverageFrom": ["**/*.(t|j)s"],
 		"coverageDirectory": "../coverage",
 		"testEnvironment": "node"
 	}

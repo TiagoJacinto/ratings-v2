@@ -1,4 +1,5 @@
 import type { Config } from "jest";
+
 import e2e from "./jest.e2e.config";
 
 export default {

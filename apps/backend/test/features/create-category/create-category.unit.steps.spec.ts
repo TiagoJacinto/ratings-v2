@@ -1,10 +1,12 @@
+import type { Mocked } from "@suites/doubles.jest";
+
 import {
-	autoBindCreateCategorySteps,
 	type CreateCategoryDataTable,
 	CreateCategoryDataTableSchema,
+	autoBindCreateCategorySteps,
 } from "@repo/features";
-import type { Mocked } from "@suites/doubles.jest";
 import { TestBed } from "@suites/unit";
+
 import { ValidationException } from "@/modules/categories/domain/category";
 import { CategoryRepository } from "@/modules/categories/repositories/category/category.repository";
 import {
@@ -15,7 +17,7 @@ import {
 
 autoBindCreateCategorySteps(
 	[
-		({ given, when, then }) => {
+		({ given, then, when }) => {
 			let categoryService: CategoryService;
 			let categoryRepository: Mocked<CategoryRepository>;
 
@@ -69,9 +71,6 @@ autoBindCreateCategorySteps(
 				categories = CreateCategoryDataTableSchema.parse(table);
 
 				categoryRepository.existsByName.mockResolvedValue(true);
-
-				// for (const category of categories)
-				//   await categoryService.createCategory(category);
 			});
 
 			const results: CreateCategoryResult[] = [];

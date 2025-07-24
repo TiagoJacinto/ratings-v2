@@ -1,7 +1,9 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { err, ok, type Result } from "@primitivestack/core";
-import { Category, type ValidationException } from "../domain/category";
+import { type Result, err, ok } from "@primitivestack/core";
+
 import type { CreateCategoryDTO } from "../dtos/create-category.dto";
+
+import { Category, type ValidationException } from "../domain/category";
 import { CategoryRepository } from "../repositories/category/category.repository";
 
 export class CategoryAlreadyExistsException {}

@@ -1,14 +1,14 @@
 ---
 exclude: |
   (?x)^(
-      docs/site/.*|       # Exclude mkdocs compiled files
-      \.history/.*|       # Exclude history files
-      .*cache.*/.*|       # Exclude cache directories
-      .*venv.*/.*|        # Exclude virtual environment directories
+    docs/site/.*|
+    \.history/.*|
+    .*cache.*/.*|
+    .*venv.*/.*|
   )$
 fail_fast: true
-# default_language_version:
-# python: python3.12
+default_language_version:
+  python: python3.13
 default_install_hook_types:
   - pre-commit
   - commit-msg
@@ -21,31 +21,14 @@ repos:
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
 
-  ### pre-commit updates ###
+  # ### pre-commit updates ###
   - repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
     rev: v0.8.0
     hooks:
       - id: pre-commit-update
         name: "update · pre-commit hooks"
 
-  # ----------------------------- 🔒 Security Tools ---------------------------- #
-
-  # - repo: https://github.com/gitleaks/gitleaks
-  #   rev: v8.28.0
-  #   hooks:
-  #     - id: gitleaks
-  #       name: "🔒 security · Detect hardcoded secrets"
-
   # --------------------------- 🔍 Code Quality Tools -------------------------- #
-
-  ### Javascript & Web Tools ###
-  # - repo: https://github.com/biomejs/pre-commit
-  #   rev: v2.1.2
-  #   hooks:
-  #     - id: biome-check
-  #       name: "🟨 javascript · Lint, format, and unsafe fixes with Biome"
-  #       args: ["--unsafe"]
-  #       additional_dependencies: ["@biomejs/biome@2.1.2"]
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
@@ -57,74 +40,11 @@ repos:
       - id: check-taskfile
         name: "✅ taskfile · Validate Task configuration"
 
-  #STRICT
-  # - repo: https://github.com/markdownlint/markdownlint
-  #   rev: v0.13.0
-  #   hooks:
-  #     - id: markdownlint
-  #       name: "📝 markdown · Lint markdown"
-
-  #STRICT
-  # - repo: https://github.com/adrienverge/yamllint
-  #   rev: v1.37.1
-  #   hooks:
-  #     - id: yamllint
-  #       name: "⚙️ yaml · Lint yaml"
-
-  ## Shell ###
-
-  #STRICT
-  # - repo: https://github.com/shellcheck-py/shellcheck-py
-  #   rev: v0.10.0.1
-  #   hooks:
-  #     - id: shellcheck
-  #       name: "🐚 shell · Lint shell scripts"
-
-  #STRICT
-  - repo: https://github.com/openstack/bashate
-    rev: 2.1.1
-    hooks:
-      - id: bashate
-        name: "🐚 shell · Check shell script code style"
-
-  ### Makefile ###
-  # - repo: https://github.com/mrtazz/checkmake.git
-  #   rev: 0.2.2
-  #   hooks:
-  #     - id: checkmake
-  #       name: "🐮 Makefile · Lint Makefile"
-  #       # No clear documentation on how to skip certain checks.
-  #       # Fixed as many as I could, but best option is to ignore the file.
-  #       exclude: |
-  #         (?x)^(
-  #           .*\{\{.*\}\}.*|
-  #         )$
-
-  ### SQL ###
-
-  # - repo: https://github.com/sqlfluff/sqlfluff
-  #   rev: 3.4.2
-  #   hooks:
-  #     - id: sqlfluff-fix
-  #       name: "📊 SQL · Attempts to fix rule violations."
-  #     # STRICT
-  #     # - id: sqlfluff-lint
-  #     #   name: "📊 SQL · Lint SQL code files"
-
-  # I can add more file optimizers (JPG, GIF, etc.)
-  ### PNG Images (Slightly lossy) ###
-  # - repo: https://github.com/shssoichiro/oxipng
-  #   rev: v9.1.3
-  #   hooks:
-  #     - id: oxipng
-  #       name: "🖼️ images · Optimize PNG files"
-  #       args: ["-o", "4", "--strip", "safe", "--alpha"]
-
   # ----------------------------- ⚡️ uv Build Tools ---------------------------- #
   # This helps ensure cross-compatibility with people who don't wish to use uv
   - repo: https://github.com/astral-sh/uv-pre-commit
     # uv version.
-    rev: 0.8.0
+    rev: 0.8.2
     hooks:
       # STRICT -- This (kind of) enforces use of uv
       - id: uv-sync
@@ -132,9 +52,9 @@ repos:
       # Update the uv lockfile
       - id: uv-lock
         name: "⚡️ uv · Update dependency lockfile"
-      # Export to txt
-      # - id: uv-export
-      #   name: "⚡️ uv · Export dependencies to requirements.txt"
+        # Export to txt
+        # - id: uv-export
+        #   name: "⚡️ uv · Export dependencies to requirements.txt"
 
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
@@ -143,7 +63,7 @@ repos:
     hooks:
       # Filesystem Checks
       - id: check-executables-have-shebangs
-        name: "📁 filesystem/⚙️ exec · Verify shebang presence"
+        name: 📁 filesystem/⚙️ exec · Verify shebang presence
         # Exclude FastAPI directories for now
         exclude: |
           (?x)^(
@@ -167,10 +87,10 @@ repos:
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
         args: ["--maxkb=5000"]
-      # - id: no-commit-to-branch
-      #   alias: protect-main
-      #   name: "🌳 git · Protect main branches"
-      #   args: ["--branch", "main", "--branch", "master"]
+        # - id: no-commit-to-branch
+        #   alias: protect-main
+        #   name: "🌳 git · Protect main branches"
+        #   args: ["--branch", "main", "--branch", "master"]
 
   # ---------------------------------------------------------------------------- #
   #                            📝 Commit Message Hooks                           #
@@ -178,7 +98,7 @@ repos:
   #
   # --------------------------- ✍️ Git Commit Quality -------------------------- #
 
-  ### Commit Message Standards ###
+  # ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.8.3
     hooks:
@@ -194,25 +114,16 @@ repos:
   - repo: local
     hooks:
       - id: install-dependencies
-        name: "📦 pnpm · Install dependencies"
+        name: 📦 pnpm · Install dependencies
         entry: pnpm install
         language: system
         pass_filenames: false
         always_run: true
 
-      # - id: eslint
-      #   name: "🟦 typescript · Lint with eslint"
-      #   entry: pnpm run lint:fix:eslint
-      #   language: system
-      #   # types: []
-      #   pass_filenames: false
-      #   always_run: true
-
       - id: typescript-type-check
         name: "🟦 typescript · Check types"
         entry: pnpm run types:check
         language: system
-        # types: []
         pass_filenames: false
         always_run: true
 
@@ -220,7 +131,6 @@ repos:
         name: "🌎 global · Lint with trunk.io"
         entry: pnpm run lint:fix:trunk
         language: system
-        # types: []
         pass_filenames: false
         always_run: true
 
@@ -228,30 +138,19 @@ repos:
         name: "🌎 global · Format with trunk.io"
         entry: pnpm run format:fix:trunk
         language: system
-        # types: []
         pass_filenames: false
         always_run: true
 
       - id: eslint
         name: "🟦 typescript · Lint with eslint"
-        entry: pnpm run lint:fix:eslint
+        entry: pnpm run lint:fix:eslint:pre-commit
         language: system
-        # types: []
         pass_filenames: false
         always_run: true
 
-      # STRICT
       - id: unit-test
         name: 🧪 test · Run tests
-        entry: pnpm run test:unit -- --testTimeout 3000
+        entry: pnpm run test:unit:pre-commit
         language: system
-        # types: []
         pass_filenames: false
         always_run: true
-
-      - id: mark-precommit-run
-        name: Mark pre-commit as run
-        entry: python3 scripts/mark_precommit_run.py
-        language: system
-        always_run: true
-        pass_filenames: false

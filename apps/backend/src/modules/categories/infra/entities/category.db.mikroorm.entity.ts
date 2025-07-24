@@ -11,12 +11,12 @@ export class Category {
 	id!: number;
 
 	@Property({
-		type: "varchar",
 		length: 100,
+		type: "varchar",
 	})
 	name: string;
 
-	@Property({ type: "text", nullable: true })
+	@Property({ nullable: true, type: "text" })
 	description?: string;
 
 	constructor({ name, description }: Props) {

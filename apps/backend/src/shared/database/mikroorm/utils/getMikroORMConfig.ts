@@ -3,36 +3,36 @@ import { PostgreSqlDriver } from "@mikro-orm/postgresql";
 import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
 
 export const getMikroORMConfig = ({
+	dbName,
 	host,
+	password,
 	port,
 	user,
-	password,
-	dbName,
 }: {
+	dbName: string | undefined;
 	host: string | undefined;
+	password: string | undefined;
 	port: number | undefined;
 	user: string | undefined;
-	password: string | undefined;
-	dbName: string | undefined;
 }) =>
 	defineConfig({
+		dbName,
 		driver: PostgreSqlDriver,
 		entities: ["./dist/modules/**/infra/entities/*.mikroorm.entity.js"],
 		entitiesTs: ["./src/modules/**/infra/entities/*.mikroorm.entity.ts"],
-		metadataProvider: TsMorphMetadataProvider,
 		host,
-		port,
-		user,
-		password,
-		dbName,
+		metadataProvider: TsMorphMetadataProvider,
 		migrations: {
+			allOrNothing: true,
+			disableForeignKeys: false,
+			dropTables: true,
+			emit: "ts",
 			path: "./src/shared/database/migrations",
 			pathTs: "./src/shared/database/migrations",
-			transactional: true,
-			disableForeignKeys: false,
-			allOrNothing: true,
-			dropTables: true,
 			safe: false,
-			emit: "ts",
+			transactional: true,
 		},
+		password,
+		port,
+		user,
 	});

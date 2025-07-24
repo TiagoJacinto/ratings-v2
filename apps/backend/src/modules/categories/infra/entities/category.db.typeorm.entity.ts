@@ -13,10 +13,9 @@ export class Category {
 	@Column("varchar", { length: 100 })
 	name!: string;
 
-	@Column({ type: "text", nullable: true })
+	@Column({ nullable: true, type: "text" })
 	description?: string;
 
-	private constructor() {}
 	static create(props: Props) {
 		const category = new Category();
 		category.name = props.name;
@@ -24,4 +23,5 @@ export class Category {
 
 		return category;
 	}
+	private constructor() {}
 }

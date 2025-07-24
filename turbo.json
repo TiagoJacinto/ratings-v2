@@ -33,6 +33,9 @@
 		"lint:fix:eslint": {
 			"dependsOn": ["^lint:fix:eslint"]
 		},
+		"lint:fix:eslint:pre-commit": {
+			"dependsOn": ["^lint:fix:eslint:pre-commit"]
+		},
 
 		"quality:check": {
 			"dependsOn": ["^quality:check"]
@@ -43,6 +46,9 @@
 
 		"test:unit": {
 			"dependsOn": ["^test:unit"]
+		},
+		"test:unit:pre-commit": {
+			"dependsOn": ["^test:unit:pre-commit"]
 		},
 		"test:unit:features": {
 			"dependsOn": ["^test:unit:features"]
