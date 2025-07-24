@@ -29,4 +29,9 @@ export default tseslint.config(
 			},
 		},
 	}),
+	{
+		rules: {
+			"sonarjs/no-empty-test-file": "off",
+		},
+	},
 );
