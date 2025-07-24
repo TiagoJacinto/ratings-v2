@@ -1,4 +1,5 @@
 import type { Config } from "jest";
+
 import base from "./jest.base.config";
 
 export default {

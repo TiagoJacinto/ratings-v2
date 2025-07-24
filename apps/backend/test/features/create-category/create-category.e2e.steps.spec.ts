@@ -1,23 +1,28 @@
+import type TestAgent from "supertest/lib/agent";
+import type { App } from "supertest/types";
+
 import { MikroOrmModule } from "@mikro-orm/nestjs";
 import { HttpStatus, type INestApplication } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
 import {
-	autoBindCreateCategorySteps,
 	type CreateCategoryDataTable,
 	CreateCategoryDataTableSchema,
+	autoBindCreateCategorySteps,
 } from "@repo/features";
 import * as request from "supertest";
-import type TestAgent from "supertest/lib/agent";
-import type { App } from "supertest/types";
+
 import { CategoriesModule } from "@/modules/categories/categories.module";
 import { validateEnv } from "@/shared/config/env.validation";
 import { MikroOrmConfigService } from "@/shared/database/mikroorm/MikroOrmConfigService";
+
 import { DatabaseFixture } from "../../support/fixtures/database.fixture";
+
+const CATEGORIES_ENDPOINT = "/categories";
 
 autoBindCreateCategorySteps(
 	[
-		({ given, when, then }) => {
+		({ given, then, when }) => {
 			let agent: TestAgent;
 			let nestApp: INestApplication<App>;
 			let dbFixture: DatabaseFixture;
@@ -51,12 +56,10 @@ autoBindCreateCategorySteps(
 				await nestApp.close();
 			});
 
-			given("I am a user", () => {});
-
 			let response: request.Response;
 
 			when("I create a category with valid category details", async () => {
-				response = await agent.post("/categories").send({
+				response = await agent.post(CATEGORIES_ENDPOINT).send({
 					name: "Category",
 					description: "Description",
 				});
@@ -66,7 +69,7 @@ autoBindCreateCategorySteps(
 			});
 
 			when("I register with invalid category details", async () => {
-				response = await agent.post("/categories").send({
+				response = await agent.post(CATEGORIES_ENDPOINT).send({
 					name: "",
 				});
 			});
@@ -82,13 +85,13 @@ autoBindCreateCategorySteps(
 				categories = CreateCategoryDataTableSchema.parse(table);
 
 				for (const category of categories)
-					await agent.post("/categories").send(category);
+					await agent.post(CATEGORIES_ENDPOINT).send(category);
 			});
 
 			const responses: request.Response[] = [];
 			when("I attempt to create categories with those names", async () => {
 				for (const category of categories)
-					responses.push(await agent.post("/categories").send(category));
+					responses.push(await agent.post(CATEGORIES_ENDPOINT).send(category));
 			});
 			then(
 				"I should see an error for each category notifying me that the category already exists",

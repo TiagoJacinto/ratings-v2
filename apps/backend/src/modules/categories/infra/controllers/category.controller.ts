@@ -7,8 +7,10 @@ import {
 	HttpStatus,
 	Post,
 } from "@nestjs/common";
-import { ValidationException } from "../../domain/category";
+
 import type { CreateCategoryDTO } from "../../dtos/create-category.dto";
+
+import { ValidationException } from "../../domain/category";
 import {
 	CategoryAlreadyExistsException,
 	type CategoryService,

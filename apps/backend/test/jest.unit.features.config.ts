@@ -1,4 +1,5 @@
 import type { Config } from "jest";
+
 import unit from "./jest.unit.config";
 
 export default {

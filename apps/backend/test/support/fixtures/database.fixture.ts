@@ -1,5 +1,6 @@
-import { type ISchemaGenerator, MikroORM } from "@mikro-orm/core";
 import type { INestApplication } from "@nestjs/common";
+
+import { type ISchemaGenerator, MikroORM } from "@mikro-orm/core";
 
 export class DatabaseFixture {
 	private readonly schemaGenerator: ISchemaGenerator;
