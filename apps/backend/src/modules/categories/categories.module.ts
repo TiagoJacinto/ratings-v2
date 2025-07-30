@@ -11,11 +11,11 @@ import { CategoryService } from "./services/category.service";
 	controllers: [CategoryController],
 	imports: [MikroOrmModule.forFeature([Category])],
 	providers: [
-		CategoryService,
 		{
 			provide: CategoryRepository,
 			useClass: MikroORMCategoryRepository,
 		},
+		CategoryService,
 	],
 })
 export class CategoriesModule {}
