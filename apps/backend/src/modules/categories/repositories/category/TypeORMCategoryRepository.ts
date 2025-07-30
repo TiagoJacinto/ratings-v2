@@ -1,12 +1,14 @@
 import type { Repository } from "typeorm";
 
 import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/common";
 
 import type { CategoryRepository } from "./category.repository";
 
 import { Category } from "../../infra/entities/category.db.typeorm.entity";
 import * as TypeORMCategoryMapper from "../../mappers/category/TypeORMCategoryMapper";
 
+@Injectable()
 export class TypeORMCategoryRepository implements CategoryRepository {
 	constructor(
 		@InjectRepository(Category)

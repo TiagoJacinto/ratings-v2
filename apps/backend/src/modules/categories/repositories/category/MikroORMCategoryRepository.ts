@@ -1,12 +1,14 @@
 import type { EntityRepository } from "@mikro-orm/core";
 
 import { InjectRepository } from "@mikro-orm/nestjs";
+import { Injectable } from "@nestjs/common";
 
 import type { CategoryRepository } from "./category.repository";
 
 import { Category } from "../../infra/entities/category.db.mikroorm.entity";
 import * as MikroORMCategoryMapper from "../../mappers/category/MikroORMCategoryMapper";
 
+@Injectable()
 export class MikroORMCategoryRepository implements CategoryRepository {
 	constructor(
 		@InjectRepository(Category)

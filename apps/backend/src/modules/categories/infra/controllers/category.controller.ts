@@ -5,6 +5,7 @@ import {
 	Controller,
 	HttpCode,
 	HttpStatus,
+	Inject,
 	Post,
 } from "@nestjs/common";
 
@@ -13,12 +14,14 @@ import type { CreateCategoryDTO } from "../../dtos/create-category.dto";
 import { ValidationException } from "../../domain/category";
 import {
 	CategoryAlreadyExistsException,
-	type CategoryService,
+	CategoryService,
 } from "../../services/category.service";
 
 @Controller("categories")
 export class CategoryController {
-	constructor(private readonly categoryService: CategoryService) {}
+	constructor(
+		@Inject(CategoryService) private readonly categoryService: CategoryService,
+	) {}
 
 	@Post()
 	@HttpCode(HttpStatus.CREATED)

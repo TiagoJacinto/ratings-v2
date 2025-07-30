@@ -3,15 +3,17 @@ import type {
 	MikroOrmOptionsFactory,
 } from "@mikro-orm/nestjs";
 import type { PostgreSqlDriver } from "@mikro-orm/postgresql";
-import type { ConfigService } from "@nestjs/config";
 
-import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { Inject, Injectable } from "@nestjs/common";
 
 import { getMikroORMConfig } from "./utils/getMikroORMConfig";
 
 @Injectable()
 export class MikroOrmConfigService implements MikroOrmOptionsFactory {
-	constructor(private readonly configService: ConfigService) {}
+	constructor(
+		@Inject(ConfigService) private readonly configService: ConfigService,
+	) {}
 
 	createMikroOrmOptions(): MikroOrmModuleOptions<PostgreSqlDriver> {
 		return getMikroORMConfig({
