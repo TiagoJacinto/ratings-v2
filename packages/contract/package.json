@@ -1,0 +1,17 @@
+{
+	"name": "@repo/contract",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"generate:openapi-spec": "tsp compile .",
+		"generate:openapi-spec:dev": "tsp compile . --watch"
+	},
+	"dependencies": {
+		"@typespec/compiler": "latest",
+		"@typespec/http": "latest",
+		"@typespec/openapi": "latest",
+		"@typespec/openapi3": "latest",
+		"@typespec/rest": "latest",
+		"@typespec/versioning": "latest"
+	}
+}
