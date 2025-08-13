@@ -21,3 +21,17 @@ coverage
 
 # next.js
 .next
+
+# builds
+dist
+build
+
+# reports
+schemathesis-report
+
+# temporary
+tmp
+temp
+
+# others
+.hypothesis

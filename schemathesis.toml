@@ -1,0 +1,14 @@
+continue-on-failure = false
+
+[output.sanitization]
+enabled = true
+
+[generation] 
+max-examples = 230
+
+[checks]
+enabled = true
+positive_data_acceptance.expected-statuses = ["2xx", 401, 403, 404, 409, "5xx"]
+
+[reports.junit]
+enabled = true
