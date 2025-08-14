@@ -4,14 +4,14 @@
  */
 
 import type { CreateCategoryMutationResponse } from '../types/CreateCategory'
-import { createCreateCategoryMutationResponse } from '../mocks/createCreateCategory'
+import { createCreateCategoryMutationResponseMock } from '../mocks/createCreateCategoryMock'
 import { http } from 'msw'
 
 export function createCategoryHandler(data?: CreateCategoryMutationResponse | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Response)) {
   return http.post('http://localhost:8080/categories', function handler(info) {
     if (typeof data === 'function') return data(info)
 
-    return new Response(JSON.stringify(data || createCreateCategoryMutationResponse(data)), {
+    return new Response(JSON.stringify(data || createCreateCategoryMutationResponseMock(data)), {
       status: 201,
       headers: {
         'Content-Type': 'application/json',

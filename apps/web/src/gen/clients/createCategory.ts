@@ -3,59 +3,52 @@
  * Do not edit manually.
  */
 
-import fetch from "@/shared/api/client";
-import type { RequestConfig, ResponseErrorConfig } from "@/shared/api/client";
+import fetch from '@/shared/api/client'
+import type { RequestConfig, ResponseErrorConfig } from '@/shared/api/client'
 import type {
-	CreateCategoryMutationRequest,
-	CreateCategoryMutationResponse,
-	CreateCategory400,
-	CreateCategory401,
-	CreateCategory403,
-	CreateCategory404,
-	CreateCategory405,
-	CreateCategory406,
-	CreateCategory409,
-	CreateCategory413,
-	CreateCategory415,
-	CreateCategory500,
-} from "../types/CreateCategory";
+  CreateCategoryMutationRequest,
+  CreateCategoryMutationResponse,
+  CreateCategory400,
+  CreateCategory401,
+  CreateCategory403,
+  CreateCategory404,
+  CreateCategory405,
+  CreateCategory406,
+  CreateCategory409,
+  CreateCategory413,
+  CreateCategory415,
+  CreateCategory500,
+} from '../types/CreateCategory'
 
 function getCreateCategoryUrl() {
-	return `http://localhost:8080/categories` as const;
+  return `http://localhost:8080/categories` as const
 }
 
 /**
  * {@link /categories}
  */
 export async function createCategory(
-	data: CreateCategoryMutationRequest,
-	config: Partial<RequestConfig<CreateCategoryMutationRequest>> & {
-		client?: typeof fetch;
-	} = {},
+  data: CreateCategoryMutationRequest,
+  config: Partial<RequestConfig<CreateCategoryMutationRequest>> & { client?: typeof fetch } = {},
 ) {
-	const { client: request = fetch, ...requestConfig } = config;
+  const { client: request = fetch, ...requestConfig } = config
 
-	const requestData = data;
-	const res = await request<
-		CreateCategoryMutationResponse,
-		ResponseErrorConfig<
-			| CreateCategory400
-			| CreateCategory401
-			| CreateCategory403
-			| CreateCategory404
-			| CreateCategory405
-			| CreateCategory406
-			| CreateCategory409
-			| CreateCategory413
-			| CreateCategory415
-			| CreateCategory500
-		>,
-		CreateCategoryMutationRequest
-	>({
-		method: "POST",
-		url: getCreateCategoryUrl().toString(),
-		data: requestData,
-		...requestConfig,
-	});
-	return res;
+  const requestData = data
+  const res = await request<
+    CreateCategoryMutationResponse,
+    ResponseErrorConfig<
+      | CreateCategory400
+      | CreateCategory401
+      | CreateCategory403
+      | CreateCategory404
+      | CreateCategory405
+      | CreateCategory406
+      | CreateCategory409
+      | CreateCategory413
+      | CreateCategory415
+      | CreateCategory500
+    >,
+    CreateCategoryMutationRequest
+  >({ method: 'POST', url: getCreateCategoryUrl().toString(), data: requestData, ...requestConfig })
+  return res
 }

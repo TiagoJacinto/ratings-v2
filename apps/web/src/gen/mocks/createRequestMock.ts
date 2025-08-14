@@ -5,7 +5,7 @@
 
 import type { Request } from '../types/Request'
 
-export function createRequest(data?: Partial<Request>): Request {
+export function createRequestMock(data?: Partial<Request>): Request {
   return {
     ...{},
     ...(data || {}),

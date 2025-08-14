@@ -6,6 +6,6 @@
 import type { Versions } from '../types/Versions'
 import { faker } from '@faker-js/faker'
 
-export function createVersions() {
+export function createVersionsMock() {
   return faker.helpers.arrayElement<any>(['1.0'])
 }

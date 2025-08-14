@@ -5,7 +5,7 @@
 
 import type { NotAcceptableResponse } from '../types/NotAcceptableResponse'
 
-export function createNotAcceptableResponse(data?: Partial<NotAcceptableResponse>): NotAcceptableResponse {
+export function createNotAcceptableResponseMock(data?: Partial<NotAcceptableResponse>): NotAcceptableResponse {
   return {
     ...{},
     ...(data || {}),

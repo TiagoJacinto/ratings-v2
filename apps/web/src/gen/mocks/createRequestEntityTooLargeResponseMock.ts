@@ -5,7 +5,7 @@
 
 import type { RequestEntityTooLargeResponse } from '../types/RequestEntityTooLargeResponse'
 
-export function createRequestEntityTooLargeResponse(data?: Partial<RequestEntityTooLargeResponse>): RequestEntityTooLargeResponse {
+export function createRequestEntityTooLargeResponseMock(data?: Partial<RequestEntityTooLargeResponse>): RequestEntityTooLargeResponse {
   return {
     ...{},
     ...(data || {}),

@@ -6,7 +6,7 @@
 import type { OpenAPIValidationError } from '../types/OpenAPIValidationError'
 import { faker } from '@faker-js/faker'
 
-export function createOpenAPIValidationError(data?: Partial<OpenAPIValidationError>): OpenAPIValidationError {
+export function createOpenAPIValidationErrorMock(data?: Partial<OpenAPIValidationError>): OpenAPIValidationError {
   return {
     ...{
       path: faker.string.alpha(),

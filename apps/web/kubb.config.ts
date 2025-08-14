@@ -28,6 +28,9 @@ export default defineConfig({
 		}),
 		pluginFaker({
 			unknownType:"unknown",
+			transformers: {
+				name: (name) => `${name}Mock`,
+			}
 		}),
 		pluginMsw({
 			baseURL: "http://localhost:8080",
@@ -37,7 +40,7 @@ export default defineConfig({
 		pluginClient({
 			baseURL: "http://localhost:8080",
 			dataReturnType: "full",
-			importPath: "@/client.ts",
+			importPath: "@/shared/api/client",
 			operations: true,
 		}),
 	],

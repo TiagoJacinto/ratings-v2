@@ -3,10 +3,10 @@
  * Do not edit manually.
  */
 
-import type { ServerSuccess } from '../types/ServerSuccess'
+import type { ServerFailure } from '../types/ServerFailure'
 import { faker } from '@faker-js/faker'
 
-export function createServerSuccess(data?: Partial<ServerSuccess>): ServerSuccess {
+export function createServerFailureMock(data?: Partial<ServerFailure>): ServerFailure {
   return {
     ...{ message: faker.string.alpha() },
     ...(data || {}),

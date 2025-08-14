@@ -5,7 +5,7 @@
 
 import type { UnsupportedMediaTypeResponse } from '../types/UnsupportedMediaTypeResponse'
 
-export function createUnsupportedMediaTypeResponse(data?: Partial<UnsupportedMediaTypeResponse>): UnsupportedMediaTypeResponse {
+export function createUnsupportedMediaTypeResponseMock(data?: Partial<UnsupportedMediaTypeResponse>): UnsupportedMediaTypeResponse {
   return {
     ...{},
     ...(data || {}),

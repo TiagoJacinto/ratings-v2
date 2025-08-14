@@ -5,7 +5,7 @@
 
 import type { MethodNotAllowedResponse } from '../types/MethodNotAllowedResponse'
 
-export function createMethodNotAllowedResponse(data?: Partial<MethodNotAllowedResponse>): MethodNotAllowedResponse {
+export function createMethodNotAllowedResponseMock(data?: Partial<MethodNotAllowedResponse>): MethodNotAllowedResponse {
   return {
     ...{},
     ...(data || {}),
