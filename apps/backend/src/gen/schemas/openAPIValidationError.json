@@ -1,0 +1,1 @@
+{"type":"object","required":["message","errors"],"properties":{"path":{"type":"string"},"message":{"type":"string"},"errors":{"type":"array","items":{"type":"object","properties":{"error_code":{"type":"string"},"message":{"type":"string"},"path":{"type":"string"}},"required":["message","path"]}}},"x-readme-ref-name":"OpenAPIValidationError"}
