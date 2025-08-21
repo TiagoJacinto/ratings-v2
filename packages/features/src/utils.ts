@@ -12,9 +12,12 @@ import type {
 	StepsDefinitionCallbackFunctionWithContext,
 } from "jest-cucumber/dist/src/feature-definition-creation";
 import type { LiteralUnion, SetFieldType } from "type-fest";
+import path from "node:path";
 
-const featuresBasePath =
-	"../../docs/guess-points/2-solution/outputs/3-acceptance-criteria";
+export const featuresBasePath = path.join(
+	import.meta.dirname,
+	"../../../docs/guess-points/2-solution/outputs/3-acceptance-criteria",
+);
 
 type Filter = "frontend" | "backend";
 
