@@ -1,3 +1,6 @@
 {
-  "recommendations": ["trunk.io"]
+  "recommendations": [
+    "trunk.io",
+    "swellaby.workspace-config-plus"
+  ]
 }

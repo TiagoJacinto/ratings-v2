@@ -7,8 +7,12 @@
 node_modules
 
 # vscode
-.vscode/*
-!.vscode/extensions.json
+.vscode/settings.json
+.vscode/settings.local.json
+.vscode/tasks.json
+.vscode/tasks.local.json
+.vscode/launch.json
+.vscode/launch.local.json
 
 # Testing
 coverage
