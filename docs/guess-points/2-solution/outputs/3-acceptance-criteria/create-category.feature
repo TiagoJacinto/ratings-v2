@@ -18,10 +18,12 @@ Feature: Create Category
 
   @backend @frontend
   Scenario: Category already created with name
-    Given a set of already created categories
+    Given a already created category with name: <name>
+    When I attempt to create a category with name: <name>
+    Then I should see an error for each category notifying me that the category already exists
+
+    Examples:
       | name      |
       | category1 |
       | category2 |
       | category3 |
-    When I attempt to create categories with those names
-    Then I should see an error for each category notifying me that the category already exists

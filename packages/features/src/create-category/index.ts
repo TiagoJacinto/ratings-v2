@@ -1,16 +1,7 @@
 import z from "zod/v4";
 import { autoBindSteps, defineFeature } from "../utils";
 
-export const CreateCategoryDataTableSchema = z
-	.object({
-		name: z.string(),
-	})
-	.array()
-	.readonly();
-
-export type CreateCategoryDataTable = z.infer<
-	typeof CreateCategoryDataTableSchema
->;
+export const CategoryName = z.string().readonly();
 
 const createCategoryFeatureName = "create-category";
 
