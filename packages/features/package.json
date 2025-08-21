@@ -1,9 +1,15 @@
 {
 	"name": "@repo/features",
 	"private": true,
+	"type": "module",
 	"main": "./src/index.ts",
 	"scripts": {
+		"symlink-features": "tsx ./scripts/symlink-features.ts",
 		"snippets": "tsx ./scripts/snippets.ts",
 		"steps": "tsx ./scripts/steps.ts"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "11.0.4",
+		"fs-extra": "11.3.1"
 	}
 }
