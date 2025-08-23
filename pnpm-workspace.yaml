@@ -3,10 +3,12 @@ packages:
   - packages/*
 
 onlyBuiltDependencies:
-  - "@nestjs/core"
-  - "@scarf/scarf"
-  - "@swc/core"
-  - "@tailwindcss/oxide"
+  - '@nestjs/core'
+  - '@scarf/scarf'
+  - '@suites/di.nestjs'
+  - '@suites/doubles.jest'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
   - core-js-pure
   - dprint
   - es5-ext
