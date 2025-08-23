@@ -3,7 +3,7 @@ continue-on-failure = false
 [output.sanitization]
 enabled = true
 
-[generation] 
+[generation]
 max-examples = 230
 
 [checks]

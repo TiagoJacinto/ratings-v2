@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pre-commit>=4.2.0",
-    "pre-commit-update>=0.8.0",
-    "schemathesis>=4.0.25",
+  "pre-commit>=4.2.0",
+  "pre-commit-update>=0.8.0",
+  "schemathesis>=4.0.25",
 ]

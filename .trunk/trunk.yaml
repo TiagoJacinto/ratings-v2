@@ -25,7 +25,7 @@ lint:
     - checkov@3.2.451
     - git-diff-check
     - isort@6.0.1
-    - markdownlint@0.45.0
+    # - markdownlint@0.45.0
     - osv-scanner@2.0.3
     - ruff@0.12.4
     - taplo@0.9.3

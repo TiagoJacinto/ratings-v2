@@ -30,7 +30,7 @@
 		"test:e2e": "turbo run test:e2e",
 		"test:e2e:features": "turbo run test:e2e:features",
 		"git-hooks:install": "pre-commit install",
-		"pre-commit:run": "pre-commit install && pre-commit run --all-files && python scripts/mark_precommit_run.py",
+		"pre-commit:run": "pre-commit install && pre-commit run --all-files",
 		"pre-commit:update": "pre-commit-update"
 	},
 	"dependencies": {
