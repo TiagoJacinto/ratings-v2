@@ -30,7 +30,7 @@ namespace Categories {
   @operationId("createCategory")
   op createCategory(...Request, @body category: Category):
     | ServerSuccessResponse<CreatedResponse.statusCode>
-    | ServerFailureResponse<ConflictResponse.statusCode | BadRequestResponse.statusCode>
+    | ServerFailureResponse<ConflictResponse.statusCode>
     | ServerBodyValidationExceptionResponse
     | ApiServerErrorResponse;
 }

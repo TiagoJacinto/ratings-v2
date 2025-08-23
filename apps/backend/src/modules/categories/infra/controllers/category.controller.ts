@@ -1,15 +1,14 @@
 import {
-	BadRequestException,
 	Body,
 	ConflictException,
 	Controller,
 	Inject,
+	InternalServerErrorException,
 	Post,
 } from "@nestjs/common";
 
 import { CreateCategoryMutationRequest } from "@/gen";
 
-import { ValidationException } from "../../domain/category";
 import {
 	CategoryAlreadyExistsException,
 	CategoryService,
@@ -32,6 +31,6 @@ export class CategoryController {
 		if (error instanceof CategoryAlreadyExistsException)
 			throw new ConflictException(error.message);
 
-		if (error instanceof ValidationException) throw new BadRequestException();
+		throw new InternalServerErrorException();
 	}
 }

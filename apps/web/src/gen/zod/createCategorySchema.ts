@@ -17,21 +17,18 @@ export const createCategory201Schema = z.lazy(() => serverSuccessSchema)
 /**
  * @description The server could not understand the request due to invalid syntax.
  */
-export const createCategory400Schema = z.union([
-  z.lazy(() => serverFailureSchema),
-  z.object({
-    code: z.enum(['BODY_VALIDATION_EXCEPTION']),
-    path: z.string(),
-    message: z.string(),
-    errors: z.array(
-      z.object({
-        error_code: z.string().optional(),
-        message: z.string(),
-        path: z.string(),
-      }),
-    ),
-  }),
-])
+export const createCategory400Schema = z.object({
+  code: z.enum(['BODY_VALIDATION_EXCEPTION']),
+  path: z.string(),
+  message: z.string(),
+  errors: z.array(
+    z.object({
+      error_code: z.string().optional(),
+      message: z.string(),
+      path: z.string(),
+    }),
+  ),
+})
 
 /**
  * @description Access is unauthorized.
