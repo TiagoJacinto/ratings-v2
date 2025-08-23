@@ -1,0 +1,28 @@
+{
+  "extends": "@tiagojacinto/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": [
+        "./src/*"
+      ],
+      "@test/*": [
+        "./test/*"
+      ]
+    },
+    "types": [
+      "vitest/globals",
+      "@vitest/browser/providers/playwright"
+    ],
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "test",
+    "global.d.ts"
+  ]
+}
