@@ -1,18 +1,14 @@
 import type { Mocked } from "@suites/doubles.jest";
 
-import {
-	type CreateCategoryDataTable,
-	CreateCategoryDataTableSchema,
-	autoBindCreateCategorySteps,
-} from "@repo/features";
+import { autoBindCreateCategorySteps, CategoryName } from "@repo/features";
 import { TestBed } from "@suites/unit";
+import { ZodError } from "zod";
 
-import { ValidationException } from "@/modules/categories/domain/category";
 import { CategoryRepository } from "@/modules/categories/repositories/category/category.repository";
 import {
+	type CreateCategoryResult,
 	CategoryAlreadyExistsException,
 	CategoryService,
-	type CreateCategoryResult,
 } from "@/modules/categories/services/category.service";
 
 autoBindCreateCategorySteps(
@@ -28,12 +24,6 @@ autoBindCreateCategorySteps(
 				categoryService = unit;
 
 				categoryRepository = unitRef.get(CategoryRepository);
-
-				// const moduleFixture = await Test.createTestingModule({
-				//   imports: [AppModule],
-				// }).compile();
-
-				// categoryService = moduleFixture.get(CategoryService);
 			});
 
 			given("I am a user", () => {});
@@ -61,34 +51,30 @@ autoBindCreateCategorySteps(
 				"I should see an error notifying me that my input is invalid",
 				() => {
 					expect(result.isOk).toBe(false);
-					expect(result.unwrapped).toBeInstanceOf(ValidationException);
+					expect(result.unwrapped).toBeInstanceOf(ZodError);
 				},
 			);
 
-			let categories: CreateCategoryDataTable;
-
-			given("a set of already created categories", (table) => {
-				categories = CreateCategoryDataTableSchema.parse(table);
-
+			given(/^a already created category with name: (.*)$/, () => {
 				categoryRepository.existsByName.mockResolvedValue(true);
 			});
 
-			const results: CreateCategoryResult[] = [];
+			when(
+				/^I attempt to create a category with name: (.*)$/,
+				async (unparsedName) => {
+					const name = CategoryName.parse(unparsedName);
 
-			when("I attempt to create categories with those names", async () => {
-				for (const category of categories)
-					results.push(await categoryService.createCategory(category));
-			});
+					result = await categoryService.createCategory({ name });
+				},
+			);
 
 			then(
 				"I should see an error for each category notifying me that the category already exists",
 				() => {
-					for (const result of results) {
-						expect(result.isOk).toBe(false);
-						expect(result.unwrapped).toBeInstanceOf(
-							CategoryAlreadyExistsException,
-						);
-					}
+					expect(result.isOk).toBe(false);
+					expect(result.unwrapped).toBeInstanceOf(
+						CategoryAlreadyExistsException,
+					);
 				},
 			);
 		},

@@ -1,24 +1,21 @@
 import type TestAgent from "supertest/lib/agent";
 import type { App } from "supertest/types";
 
-import { MikroOrmModule } from "@mikro-orm/nestjs";
-import { HttpStatus, type INestApplication } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { type INestApplication, HttpStatus } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-import {
-	type CreateCategoryDataTable,
-	CreateCategoryDataTableSchema,
-	autoBindCreateCategorySteps,
-} from "@repo/features";
+import { CategoryName, autoBindCreateCategorySteps } from "@repo/features";
 import * as request from "supertest";
+import { type SetFieldType } from "type-fest";
 
 import { CategoriesModule } from "@/modules/categories/categories.module";
-import { validateEnv } from "@/shared/config/env.validation";
-import { MikroOrmConfigService } from "@/shared/database/mikroorm/MikroOrmConfigService";
+import { type CreateCategory400, type CreateCategoryMutation } from "@/gen";
+import { SharedModule } from "@/shared/shared.module";
 
 import { DatabaseFixture } from "../../support/fixtures/database.fixture";
 
 const CATEGORIES_ENDPOINT = "/categories";
+
+type StrictResponse<TBody> = SetFieldType<request.Response, "body", TBody>;
 
 autoBindCreateCategorySteps(
 	[
@@ -29,16 +26,7 @@ autoBindCreateCategorySteps(
 
 			beforeAll(async () => {
 				const moduleFixture = await Test.createTestingModule({
-					imports: [
-						ConfigModule.forRoot({
-							validate: validateEnv,
-						}),
-						MikroOrmModule.forRootAsync({
-							imports: [ConfigModule],
-							useClass: MikroOrmConfigService,
-						}),
-						CategoriesModule,
-					],
+					imports: [SharedModule, CategoriesModule],
 				}).compile();
 
 				nestApp = moduleFixture.createNestApplication();
@@ -56,7 +44,11 @@ autoBindCreateCategorySteps(
 				await nestApp.close();
 			});
 
-			let response: request.Response;
+			given("I am a user", () => {});
+
+			let response: StrictResponse<
+				CreateCategoryMutation["Response"] | CreateCategoryMutation["Errors"]
+			>;
 
 			when("I create a category with valid category details", async () => {
 				response = await agent.post(CATEGORIES_ENDPOINT).send({
@@ -66,6 +58,7 @@ autoBindCreateCategorySteps(
 			});
 			then("I should see a success message", () => {
 				expect(response.statusCode).toBe(HttpStatus.CREATED);
+				expect(typeof response.body.message === "string").toBe(true);
 			});
 
 			when("I register with invalid category details", async () => {
@@ -77,27 +70,36 @@ autoBindCreateCategorySteps(
 				"I should see an error notifying me that my input is invalid",
 				() => {
 					expect(response.statusCode).toBe(HttpStatus.BAD_REQUEST);
+					expect((response.body as CreateCategory400).code).toBe(
+						"BODY_VALIDATION_EXCEPTION",
+					);
+					expect(typeof response.body.message === "string").toBe(true);
 				},
 			);
 
-			let categories: CreateCategoryDataTable;
-			given("a set of already created categories", async (table) => {
-				categories = CreateCategoryDataTableSchema.parse(table);
+			given(
+				/^a already created category with name: (.*)$/,
+				async (unparsedName) => {
+					const name = CategoryName.parse(unparsedName);
 
-				for (const category of categories)
-					await agent.post(CATEGORIES_ENDPOINT).send(category);
-			});
+					await agent.post(CATEGORIES_ENDPOINT).send({ name });
+				},
+			);
 
-			const responses: request.Response[] = [];
-			when("I attempt to create categories with those names", async () => {
-				for (const category of categories)
-					responses.push(await agent.post(CATEGORIES_ENDPOINT).send(category));
-			});
+			when(
+				/^I attempt to create a category with name: (.*)$/,
+				async (unparsedName) => {
+					const name = CategoryName.parse(unparsedName);
+
+					response = await agent.post(CATEGORIES_ENDPOINT).send({ name });
+				},
+			);
+
 			then(
 				"I should see an error for each category notifying me that the category already exists",
 				() => {
-					for (const response of responses)
-						expect(response.statusCode).toBe(HttpStatus.CONFLICT);
+					expect(response.statusCode).toBe(HttpStatus.CONFLICT);
+					expect(typeof response.body.message === "string").toBe(true);
 				},
 			);
 		},
