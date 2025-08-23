@@ -2,15 +2,34 @@
 	"$schema": "https://turborepo.com/schema.json",
 	"ui": "tui",
 	"tasks": {
+		"generate:openapi-spec": {
+			"dependsOn": ["^generate:openapi-spec"],
+			"inputs": ["$TURBO_DEFAULT$"]
+		},
+		"generate:openapi-spec:dev": {
+			"persistent": true
+		},
+		"generate:api-sdk": {
+			"dependsOn": ["^generate:openapi-spec", "^generate:api-sdk"],
+			"inputs": ["$TURBO_DEFAULT$"]
+		},
+		"generate:api-sdk:dev": {
+			"dependsOn": ["^generate:openapi-spec"],
+			"persistent": true,
+			"with": ["generate:openapi-spec:dev"]
+		},
+
 		"build": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["^generate:api-sdk", "^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
 			"outputs": [".next/**", "!.next/cache/**"]
 		},
 
-		"dev": {
+		"start:dev": {
+			"dependsOn": ["^generate:api-sdk"],
 			"cache": false,
-			"persistent": true
+			"persistent": true,
+			"with": ["generate:api-sdk:dev"]
 		},
 
 		"types:check": {
