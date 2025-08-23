@@ -9,7 +9,7 @@ export default {
 	...configs.node,
 	moduleFileExtensions: ["js", "json", "ts"],
 	moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-		prefix: "../../../",
+		prefix: "<rootDir>/../",
 	}),
 	rootDir: ".",
 	testEnvironment: "node",
