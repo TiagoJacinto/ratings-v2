@@ -3,13 +3,11 @@ import {
 	Body,
 	ConflictException,
 	Controller,
-	HttpCode,
-	HttpStatus,
 	Inject,
 	Post,
 } from "@nestjs/common";
 
-import type { CreateCategoryDTO } from "../../dtos/create-category.dto";
+import { CreateCategoryMutationRequest } from "@/gen";
 
 import { ValidationException } from "../../domain/category";
 import {
@@ -20,19 +18,19 @@ import {
 @Controller("categories")
 export class CategoryController {
 	constructor(
-		@Inject(CategoryService) private readonly categoryService: CategoryService,
+		@Inject(CategoryService)
+		private readonly categoryService: CategoryService,
 	) {}
 
 	@Post()
-	@HttpCode(HttpStatus.CREATED)
-	async create(@Body() dto: CreateCategoryDTO) {
+	async create(@Body() dto: CreateCategoryMutationRequest) {
 		const result = await this.categoryService.createCategory(dto);
-		if (result.isOk) return;
+		if (result.isOk) return { message: "Category created successfully" };
 
 		const { error } = result;
 
 		if (error instanceof CategoryAlreadyExistsException)
-			throw new ConflictException();
+			throw new ConflictException(error.message);
 
 		if (error instanceof ValidationException) throw new BadRequestException();
 	}

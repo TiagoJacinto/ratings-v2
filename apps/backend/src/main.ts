@@ -1,23 +1,20 @@
 import { ValidationPipe } from "@nestjs/common";
-import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { NestFactory } from "@nestjs/core";
 
 import { AppModule } from "./app.module";
+import { OpenApiExceptionFilter } from "./shared/filters/openapi.exception-filter";
+import { HttpExceptionFilter } from "./shared/filters/http.exception-filter";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
-	const config = new DocumentBuilder()
-		.setTitle("Ratings API")
-		.setVersion("1.0")
-		.build();
-
-	SwaggerModule.setup("api", app, () =>
-		SwaggerModule.createDocument(app, config),
-	);
-
+	app.useGlobalFilters(new HttpExceptionFilter(), new OpenApiExceptionFilter());
 	app.useGlobalPipes(new ValidationPipe());
 
-	await app.listen(process.env.PORT ?? 3000);
+	const port = process.env.PORT ?? 8080;
+
+	await app.listen(port);
+
+	console.log(`Running server in ${port} port`);
 }
 void bootstrap();
