@@ -1,9 +1,10 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { type Result, err, ok } from "@primitivestack/core";
+import { ZodError } from "zod";
 
 import { Category as CreateCategoryDTO } from "@/gen";
 
-import { type ValidationException, Category } from "../domain/category";
+import { Category } from "../domain/category";
 import { CategoryRepository } from "../repositories/category/category.repository";
 
 export class CategoryAlreadyExistsException {
@@ -12,7 +13,7 @@ export class CategoryAlreadyExistsException {
 
 export type CreateCategoryResult = Result<
 	undefined,
-	CategoryAlreadyExistsException | ValidationException
+	CategoryAlreadyExistsException | ZodError
 >;
 
 @Injectable()
