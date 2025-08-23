@@ -6,10 +6,5 @@
 		"includes": [
 			"{src,apps,libs,test}/**/*.ts"
 		]
-	},
-	"javascript": {
-		"parser": {
-			"unsafeParameterDecoratorsEnabled": true
-		}
 	}
 }
