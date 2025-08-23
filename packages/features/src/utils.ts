@@ -1,3 +1,9 @@
+import type {
+	ScenariosDefinitionCallbackFunction,
+	StepsDefinitionCallbackFunctionWithContext,
+} from "jest-cucumber/dist/src/feature-definition-creation";
+import type { LiteralUnion, SetFieldType } from "type-fest";
+
 import { readFileSync } from "node:fs";
 import {
 	type Options as BaseOptions,
@@ -7,15 +13,10 @@ import {
 	loadFeature as baseLoadFeature,
 	parseFeature as baseParseFeature,
 } from "jest-cucumber";
-import type {
-	ScenariosDefinitionCallbackFunction,
-	StepsDefinitionCallbackFunctionWithContext,
-} from "jest-cucumber/dist/src/feature-definition-creation";
-import type { LiteralUnion, SetFieldType } from "type-fest";
 import path from "node:path";
 
 export const featuresBasePath = path.join(
-	import.meta.dirname,
+	__dirname,
 	"../../../docs/guess-points/2-solution/outputs/3-acceptance-criteria",
 );
 

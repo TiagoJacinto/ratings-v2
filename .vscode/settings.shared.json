@@ -1,3 +1,8 @@
 {
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "conventionalCommits.scopes": [
+    "web",
+    "backend",
+    "features"
+  ]
 }
