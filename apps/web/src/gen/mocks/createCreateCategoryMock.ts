@@ -21,15 +21,18 @@ export function createCreateCategory201Mock() {
  * @description The server could not understand the request due to invalid syntax.
  */
 export function createCreateCategory400Mock(data?: Partial<CreateCategory400>): CreateCategory400 {
-  return {
-    ...{
-      code: faker.helpers.arrayElement<NonNullable<CreateCategory400>['code']>(['BODY_VALIDATION_EXCEPTION']),
-      path: faker.string.alpha(),
-      message: faker.string.alpha(),
-      errors: faker.helpers.multiple(() => ({ error_code: faker.string.alpha(), message: faker.string.alpha(), path: faker.string.alpha() })),
-    },
-    ...(data || {}),
-  }
+  return (
+    data ||
+    faker.helpers.arrayElement<any>([
+      {
+        code: faker.helpers.arrayElement<NonNullable<CreateCategory400>['code']>(['BODY_VALIDATION_EXCEPTION']),
+        path: faker.string.alpha(),
+        message: faker.string.alpha(),
+        errors: faker.helpers.multiple(() => ({ error_code: faker.string.alpha(), message: faker.string.alpha(), path: faker.string.alpha() })),
+      },
+      createServerFailureMock(),
+    ])
+  )
 }
 
 /**

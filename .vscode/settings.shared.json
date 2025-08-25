@@ -3,6 +3,7 @@
   "conventionalCommits.scopes": [
     "web",
     "backend",
-    "features"
+    "features",
+    "api contract"
   ]
 }

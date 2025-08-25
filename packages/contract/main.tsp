@@ -107,8 +107,9 @@ model OpenAPIValidationError {
 }
 
 model InternalServerErrorResponse is ServerFailureResponse<500>;
+model InvalidJSONBody is ServerFailureResponse<BadRequestResponse.statusCode>;
 
-alias ApiServerErrorResponse = OpenAPIValidationErrorResponse | InternalServerErrorResponse;
+alias ApiServerErrorResponse = OpenAPIValidationErrorResponse | InternalServerErrorResponse | InvalidJSONBody;
 
 model MethodNotAllowedResponse is Response<405>;
 model UnsupportedMediaTypeResponse is Response<415>;

@@ -22,37 +22,39 @@ export type CreateCategory400CodeEnum = (typeof createCategory400CodeEnum)[keyof
 /**
  * @description The server could not understand the request due to invalid syntax.
  */
-export type CreateCategory400 = {
-  /**
-   * @type string
-   */
-  code: CreateCategory400CodeEnum
-  /**
-   * @type string
-   */
-  path: string
-  /**
-   * @type string
-   */
-  message: string
-  /**
-   * @type array
-   */
-  errors: {
-    /**
-     * @type string | undefined
-     */
-    error_code?: string
-    /**
-     * @type string
-     */
-    message: string
-    /**
-     * @type string
-     */
-    path: string
-  }[]
-}
+export type CreateCategory400 =
+  | {
+      /**
+       * @type string
+       */
+      code: CreateCategory400CodeEnum
+      /**
+       * @type string
+       */
+      path: string
+      /**
+       * @type string
+       */
+      message: string
+      /**
+       * @type array
+       */
+      errors: {
+        /**
+         * @type string | undefined
+         */
+        error_code?: string
+        /**
+         * @type string
+         */
+        message: string
+        /**
+         * @type string
+         */
+        path: string
+      }[]
+    }
+  | ServerFailure
 
 /**
  * @description Access is unauthorized.
