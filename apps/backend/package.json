@@ -34,9 +34,10 @@
 		"test:e2e": "jest --config ./test/jest.e2e.config.ts",
 		"test:e2e:features": "jest --config ./test/jest.e2e.features.config.ts",
 		"db:mikro-orm:migration:initial": "mikro-orm migration:create --initial --config=src/shared/database/mikroorm/config.ts",
+		"db:mikro-orm:migration:create": "mikro-orm migration:create --config=src/shared/database/mikroorm/config.ts",
 		"db:mikro-orm:migration:up": "pnpm mikro-orm migration:up --config=src/shared/database/mikroorm/config.ts",
-		"db:migration:create": "typeorm migration:create ./src/shared/database/migrations/migration",
-		"db:migration:generate": "typeorm migration:generate ./src/shared/database/migrations/migration",
+		"db:typeorm:migration:create": "typeorm migration:create ./src/shared/database/mikroorm/migrations/migration",
+		"db:typeorm:migration:generate": "typeorm migration:generate ./src/shared/database/mikroorm/migrations/migration",
 		"generate:api-sdk": "kubb generate",
 		"generate:api-sdk:dev": "kubb generate --watch"
 	},
